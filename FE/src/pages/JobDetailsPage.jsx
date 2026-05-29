@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios.js';
 import { motion } from 'framer-motion';
 import { 
   Building, MapPin, DollarSign, Calendar, Clock, 
@@ -24,9 +24,7 @@ export default function JobDetailsPage() {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const res = await axios.get(`http://localhost:5001/api/jobs/${id}`, {
-          withCredentials: true,
-        });
+        const res = await api.get(`/jobs/${id}`);
         setJob(res.data);
       } catch (err) {
         console.error('Fetch job error', err);
@@ -53,9 +51,7 @@ export default function JobDetailsPage() {
 
     setApplyLoading(true);
     try {
-      await axios.post(`http://localhost:5001/api/jobs/${id}/apply`, {}, {
-        withCredentials: true,
-      });
+      await api.post(`/jobs/${id}/apply`);
       toast.success('Successfully applied!');
       setJob(prev => ({ ...prev, hasApplied: true, applicationStatus: 'Pending' }));
     } catch (err) {

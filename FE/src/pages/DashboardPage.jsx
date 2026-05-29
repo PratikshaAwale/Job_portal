@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import axios from 'axios';
+import api from '../api/axios.js';
 import {
   Briefcase, Bell, User, Settings, LogOut, LayoutDashboard,
   FileText, Send, Bookmark, Star, ArrowUpRight, Search, Plus,
@@ -104,22 +104,22 @@ export default function DashboardPage() {
     try {
       if (!isRecruiter) {
         // Seeker: Fetch applied jobs
-        const appliedRes = await axios.get('http://localhost:5001/api/jobs/applied', { withCredentials: true });
+        const appliedRes = await api.get('/jobs/applied');
         setAppliedJobs(appliedRes.data);
 
         // Seeker: Fetch all portal jobs to browse & apply
-        const allJobsRes = await axios.get('http://localhost:5001/api/jobs', { withCredentials: true });
+        const allJobsRes = await api.get('/jobs');
         // Filter out jobs already applied to
         const appliedIds = appliedRes.data.map(j => j._id);
         const filtered = allJobsRes.data.filter(j => !appliedIds.includes(j._id));
         setAvailableJobs(filtered);
         
         // Fetch Job Seeker Interviews
-        const seekerIntRes = await axios.get('http://localhost:5001/api/interviews/seeker', { withCredentials: true });
+        const seekerIntRes = await api.get('/interviews/seeker');
         setSeekerInterviews(seekerIntRes.data);
       } else {
         // Recruiter: Fetch posted jobs
-        const postedRes = await axios.get('http://localhost:5001/api/jobs/posted', { withCredentials: true });
+        const postedRes = await api.get('/jobs/posted');
         setPostedJobs(postedRes.data);
 
         // Flatten candidates across all posted jobs
@@ -147,7 +147,7 @@ export default function DashboardPage() {
         setAllApplications(extractedApps);
 
         // Fetch Recruiter Scheduled Interviews
-        const recruiterIntRes = await axios.get('http://localhost:5001/api/interviews/recruiter', { withCredentials: true });
+        const recruiterIntRes = await api.get('/interviews/recruiter');
         setRecruiterInterviews(recruiterIntRes.data);
       }
     } catch (err) {
@@ -207,13 +207,12 @@ export default function DashboardPage() {
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      await axios.post(
-        `http://localhost:5001/api/jobs/${applyForm.jobId}/apply`,
+      await api.post(
+        `/jobs/${applyForm.jobId}/apply`,
         {
           skills: applyForm.skills,
           resume: seekerProfile.resumeUrl || 'resume.pdf'
-        },
-        { withCredentials: true }
+        }
       );
       setSuccessMsg(`Successfully applied for the ${applyForm.jobTitle} role!`);
       setApplyForm({ jobId: '', jobTitle: '', skills: '', resume: '' });
@@ -232,10 +231,9 @@ export default function DashboardPage() {
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      await axios.post(
-        'http://localhost:5001/api/jobs',
-        newJob,
-        { withCredentials: true }
+      await api.post(
+        '/jobs',
+        newJob
       );
       setSuccessMsg('Job listing successfully posted on JobVerse!');
       setNewJob({ title: '', category: 'IT & Software', salary: '', type: 'Full-time', location: '', description: '', skills: '', experience: 'Fresher', employmentType: 'Full-time' });
@@ -252,10 +250,9 @@ export default function DashboardPage() {
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      await axios.put(
-        `http://localhost:5001/api/jobs/applications/${jobId}/${applicantUserId}/status`,
-        { status: newStatus },
-        { withCredentials: true }
+      await api.put(
+        `/jobs/applications/${jobId}/${applicantUserId}/status`,
+        { status: newStatus }
       );
       setSuccessMsg(`Application status updated to ${newStatus}`);
       fetchDashboardData();
@@ -276,8 +273,8 @@ export default function DashboardPage() {
     setLoading(true);
     setErrorMsg('');
     try {
-      await axios.post(
-        'http://localhost:5001/api/interviews',
+      await api.post(
+        '/interviews',
         {
           applicationId: scheduleTarget.applicationId,
           jobSeekerId: scheduleTarget.userId,
@@ -290,8 +287,7 @@ export default function DashboardPage() {
           interviewTime: scheduleForm.interviewTime,
           meetLink: scheduleForm.meetLink,
           message: scheduleForm.message
-        },
-        { withCredentials: true }
+        }
       );
       setSuccessMsg(`Interview scheduled successfully with ${scheduleTarget.name}! Email sent.`);
       setShowScheduleModal(false);

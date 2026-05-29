@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios.js';
 import { Bell, CheckCircle, Clock } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { formatDistanceToNow } from 'date-fns';
@@ -10,9 +10,7 @@ export default function NotificationsPage() {
 
   const fetchNotifications = async () => {
     try {
-      const res = await axios.get('http://localhost:5001/api/notifications', {
-        withCredentials: true,
-      });
+      const res = await api.get('/notifications');
       setNotifications(res.data);
     } catch (error) {
       console.error('Failed to fetch notifications', error);
@@ -28,9 +26,7 @@ export default function NotificationsPage() {
 
   const markAsRead = async (id) => {
     try {
-      await axios.put(`http://localhost:5001/api/notifications/${id}/read`, {}, {
-        withCredentials: true,
-      });
+      await api.put(`/notifications/${id}/read`);
       setNotifications(notifications.map(n => 
         n._id === id ? { ...n, isRead: true } : n
       ));
@@ -41,9 +37,7 @@ export default function NotificationsPage() {
 
   const markAllAsRead = async () => {
     try {
-      await axios.put('http://localhost:5001/api/notifications/read-all', {}, {
-        withCredentials: true,
-      });
+      await api.put('/notifications/read-all');
       setNotifications(notifications.map(n => ({ ...n, isRead: true })));
       toast.success('All notifications marked as read');
     } catch (error) {

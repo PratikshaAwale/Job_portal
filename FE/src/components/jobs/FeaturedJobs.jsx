@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MapPin, Clock, IndianRupee, Briefcase, Bookmark, BookmarkCheck, ExternalLink } from 'lucide-react';
-import axios from 'axios';
+import api from '../../api/axios.js';
 import { formatDistanceToNow } from 'date-fns';
 import './FeaturedJobs.css'; 
 
@@ -85,7 +85,7 @@ export default function FeaturedJobs() {
   useEffect(() => {
     const fetchPublicJobs = async () => {
       try {
-        const res = await axios.get('http://localhost:5001/api/jobs/public');
+        const res = await api.get('/jobs/public');
         setJobs(res.data.slice(0, 6)); // Show latest 6 jobs
       } catch (err) {
         console.error('Failed to fetch public jobs:', err);
