@@ -1,0 +1,128 @@
+@reference "../../index.css";
+
+/* ── Authentication Layout ── */
+.auth-container {
+  @apply min-h-screen bg-slate-50 dark:bg-slate-950 flex;
+}
+
+.auth-left-pane {
+  @apply w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 lg:p-24 relative z-10;
+}
+
+.auth-card {
+  @apply relative w-full sm:min-w-[420px] lg:min-w-[480px] max-w-lg bg-white dark:bg-slate-900 rounded-3xl shadow-xl dark:shadow-blue-900/10 p-8 sm:p-10 border border-slate-100 dark:border-slate-800;
+}
+
+.auth-card-register {
+  @apply mt-8 mb-8;
+}
+
+/* ── Typography ── */
+.auth-title {
+  @apply text-3xl font-black text-slate-900 dark:text-white mb-2 tracking-tight;
+}
+
+.auth-subtitle {
+  @apply text-slate-500 dark:text-slate-400;
+}
+
+.auth-label {
+  @apply text-sm font-semibold text-slate-700 dark:text-slate-300;
+}
+
+/* ── Form Elements ── */
+.auth-input-wrapper {
+  @apply relative;
+}
+
+.auth-input-icon {
+  @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none;
+}
+
+.auth-input-icon svg {
+  @apply h-5 w-5 text-slate-400;
+}
+
+.auth-input-icon-right {
+  @apply absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300;
+}
+
+.auth-input {
+  @apply w-full pl-10 pr-4 py-3 rounded-xl border bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all;
+}
+
+.auth-input.has-icon-right {
+  @apply pr-12;
+}
+
+.auth-input.error {
+  @apply border-red-500;
+}
+
+.auth-input:not(.error) {
+  @apply border-slate-200 dark:border-slate-700;
+}
+
+.auth-error-msg {
+  @apply text-red-500 text-sm mt-1;
+}
+
+.auth-checkbox {
+  @apply w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500/50 bg-slate-50 dark:bg-slate-800;
+}
+
+/* ── Buttons ── */
+.auth-btn {
+  @apply w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all transform hover:-translate-y-0.5;
+}
+
+.auth-google-btn {
+  @apply w-full py-3 px-4 flex items-center justify-center gap-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-700 dark:text-slate-300 font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm;
+}
+
+/* ── Role Selection ── */
+.role-label {
+  @apply cursor-pointer flex items-center justify-center py-2 px-2 rounded-xl border text-sm font-medium transition-all text-center;
+}
+
+.role-label.active {
+  @apply border-blue-600 bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:border-blue-500 dark:text-blue-400;
+}
+
+.role-label:not(.active) {
+  @apply border-slate-200 text-slate-600 hover:border-blue-300 dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-500;
+}
+
+/* ── Right Pane Illustration ── */
+.auth-right-pane {
+  @apply hidden lg:flex w-1/2 bg-blue-50/50 dark:bg-slate-900/50 items-center justify-center p-12 relative overflow-hidden;
+}
+
+.auth-decoration-tr {
+  @apply absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3;
+}
+
+.auth-decoration-bl {
+  @apply absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3;
+}
+
+.auth-illustration-img {
+  @apply w-full max-w-full mx-auto h-auto object-contain transform hover:scale-105 transition-transform duration-700 mix-blend-multiply dark:mix-blend-normal;
+}
+
+/* ── Utilities ── */
+.auth-link {
+  @apply font-semibold text-blue-600 dark:text-blue-400 hover:underline;
+}
+
+.auth-divider-container {
+  @apply relative flex items-center py-2;
+}
+
+.auth-divider-line {
+  @apply flex-grow border-t border-slate-200 dark:border-slate-700;
+}
+
+.auth-divider-text {
+  @apply flex-shrink-0 mx-4 text-slate-400 text-sm;
+}

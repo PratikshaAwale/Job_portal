@@ -1,0 +1,81 @@
+@reference "../../index.css";
+
+/* ── Footer Main Styles ── */
+.footer {
+  @apply bg-slate-900 dark:bg-slate-950 text-slate-300;
+}
+
+.footer-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.footer-grid {
+  @apply py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12;
+}
+
+.footer-brand-col {
+  @apply lg:col-span-2;
+}
+
+/* ── Brand Column ── */
+.footer-logo-container {
+  @apply flex items-center gap-2.5 mb-5;
+}
+
+.footer-logo-icon {
+  @apply w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center shadow-lg;
+}
+
+.footer-logo-text {
+  @apply text-xl font-bold text-white;
+}
+
+.footer-description {
+  @apply text-sm text-slate-400 leading-relaxed max-w-sm mb-6;
+}
+
+.footer-contact-list {
+  @apply space-y-3;
+}
+
+.footer-contact-item {
+  @apply flex items-center gap-3 text-slate-400 hover:text-blue-400 transition-colors text-sm;
+}
+
+/* ── Links Column ── */
+.footer-heading {
+  @apply text-sm font-bold uppercase tracking-wider text-white mb-5;
+}
+
+.footer-links-list {
+  @apply space-y-3;
+}
+
+.footer-link {
+  @apply inline-flex items-center gap-1 text-sm text-slate-400 hover:text-blue-400 transition-colors;
+}
+
+.footer-link-icon {
+  @apply w-3 h-3 opacity-0 -translate-x-1 transition-all;
+}
+
+.footer-link:hover .footer-link-icon {
+  @apply opacity-100 translate-x-0;
+}
+
+/* ── Bottom Bar ── */
+.footer-bottom {
+  @apply py-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4;
+}
+
+.footer-copyright {
+  @apply text-sm text-slate-500;
+}
+
+.social-links-container {
+  @apply flex items-center gap-3;
+}
+
+.social-link {
+  @apply p-2.5 rounded-lg bg-slate-800 hover:bg-blue-600 text-slate-400 hover:text-white transition-colors duration-200;
+}

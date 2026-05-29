@@ -1,0 +1,106 @@
+@reference "../../index.css";
+
+
+.navbar {
+  @apply fixed top-0 left-0 right-0 z-50 transition-all duration-500;
+}
+
+.navbar-scrolled {
+  @apply py-3 bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-lg shadow-slate-900/5 dark:shadow-black/20;
+}
+
+.navbar-top {
+  @apply py-5 bg-slate-900/10 dark:bg-white/5 backdrop-blur-sm;
+}
+
+.navbar-inner {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* ── Logo Styles ── */
+.logo-container {
+  @apply flex items-center gap-2.5;
+}
+
+.logo-icon {
+  @apply relative w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center shadow-lg transition-all duration-300;
+}
+
+.logo-container:hover .logo-icon {
+  @apply shadow-blue-500/20;
+}
+
+.logo-text {
+  @apply text-xl font-bold tracking-tight;
+}
+
+.desktop-menu {
+  @apply hidden lg:flex items-center gap-1;
+}
+
+.desktop-actions {
+  @apply hidden lg:flex items-center gap-3;
+}
+
+/* ── Nav Link Styles ── */
+.nav-link {
+  @apply relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-950/30;
+}
+
+.nav-link-scrolled {
+  @apply text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400;
+}
+
+.nav-link-top {
+  @apply text-white/90 hover:text-white;
+}
+
+.nav-link-active {
+  @apply text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-900/20;
+}
+
+.btn-login {
+  @apply px-5 py-2.5 text-sm font-semibold rounded-xl transition-all;
+}
+
+/* ── Button Styles ── */
+.btn-login-scrolled {
+  @apply text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/30;
+}
+
+.btn-login-top {
+  @apply text-white hover:bg-white/10;
+}
+
+.btn-register {
+  @apply inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-400 rounded-xl shadow-lg hover:shadow-blue-500/20 transition-all duration-300;
+}
+
+/* ── Theme Toggle ── */
+.theme-toggle-btn {
+  @apply p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-200;
+}
+
+.mobile-controls {
+  @apply flex items-center gap-2 lg:hidden;
+}
+
+.mobile-action-btn {
+  @apply p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300;
+}
+
+.mobile-menu {
+  @apply lg:hidden overflow-hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800;
+}
+
+.mobile-menu-inner {
+  @apply max-w-7xl mx-auto px-4 py-4 space-y-1;
+}
+
+.mobile-nav-link {
+  @apply block px-4 py-3 text-sm font-medium rounded-xl text-slate-700 dark:text-slate-200;
+}
+
+.mobile-nav-link-active {
+  @apply bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400;
+}
