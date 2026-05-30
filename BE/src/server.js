@@ -19,10 +19,6 @@ connectDB();
 
 const app = express();
 
-// Middleware
-app.use(express.json());
-app.use(cookieParser());
-
 // CORS Configuration
 const allowedOrigins = [
   'http://localhost:5173',
@@ -46,6 +42,10 @@ app.use(
     credentials: true,
   })
 );
+
+// Middleware
+app.use(express.json());
+app.use(cookieParser());
 
 // Routes
 app.use('/api/auth', authRoutes);

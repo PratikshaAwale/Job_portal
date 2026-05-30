@@ -7,17 +7,19 @@ import sendEmail from '../utils/sendEmail.js';
 
 // Helper function to set cookies
 const setTokenCookies = (res, accessToken, refreshToken) => {
+  const isProduction = process.env.NODE_ENV === 'production';
+
   res.cookie('jwt', accessToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 15 * 60 * 1000, // 15 minutes
   });
 
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 };
@@ -111,13 +113,19 @@ export const logoutUser = async (req, res) => {
       await user.save();
     }
 
+    const isProduction = process.env.NODE_ENV === 'production';
+
     res.cookie('jwt', '', {
       httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
       expires: new Date(0),
     });
 
     res.cookie('refreshToken', '', {
       httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
       expires: new Date(0),
     });
 
@@ -152,10 +160,12 @@ export const refreshToken = async (req, res) => {
 
       const accessToken = generateAccessToken(user._id);
 
+      const isProduction = process.env.NODE_ENV === 'production';
+
       res.cookie('jwt', accessToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
+        secure: isProduction,
+        sameSite: isProduction ? 'none' : 'lax',
         maxAge: 15 * 60 * 1000,
       });
 
