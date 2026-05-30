@@ -6,8 +6,9 @@ import { generateAccessToken, generateRefreshToken } from '../utils/generateToke
 import sendEmail from '../utils/sendEmail.js';
 
 // Helper function to set cookies
-const setTokenCookies = (res, accessToken, refreshToken) => {
-  const isProduction = process.env.NODE_ENV === 'production';
+const setTokenCookies = (req, res, accessToken, refreshToken) => {
+  const origin = req.headers.origin || '';
+  const isProduction = process.env.NODE_ENV === 'production' || (origin && !origin.includes('localhost'));
 
   res.cookie('jwt', accessToken, {
     httpOnly: true,
@@ -52,7 +53,7 @@ export const registerUser = async (req, res) => {
       user.refreshToken = refreshToken;
       await user.save();
 
-      setTokenCookies(res, accessToken, refreshToken);
+      setTokenCookies(req, res, accessToken, refreshToken);
 
       res.status(201).json({
         _id: user._id,
@@ -85,7 +86,7 @@ export const loginUser = async (req, res) => {
       user.refreshToken = refreshToken;
       await user.save();
 
-      setTokenCookies(res, accessToken, refreshToken);
+      setTokenCookies(req, res, accessToken, refreshToken);
 
       res.json({
         _id: user._id,
@@ -113,7 +114,8 @@ export const logoutUser = async (req, res) => {
       await user.save();
     }
 
-    const isProduction = process.env.NODE_ENV === 'production';
+    const origin = req.headers.origin || '';
+    const isProduction = process.env.NODE_ENV === 'production' || (origin && !origin.includes('localhost'));
 
     res.cookie('jwt', '', {
       httpOnly: true,
@@ -160,7 +162,8 @@ export const refreshToken = async (req, res) => {
 
       const accessToken = generateAccessToken(user._id);
 
-      const isProduction = process.env.NODE_ENV === 'production';
+      const origin = req.headers.origin || '';
+      const isProduction = process.env.NODE_ENV === 'production' || (origin && !origin.includes('localhost'));
 
       res.cookie('jwt', accessToken, {
         httpOnly: true,
